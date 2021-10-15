@@ -44,7 +44,7 @@ func getStudentInfo() (name, roll, course string) {
 
 //Main
 func main() {
-	name, roll, course := getStudentInfo()
+	epoch, name, roll, course := getStudentInfo()
 
 	file, err := os.Create("attendance.txt")
 	if err != nil {
@@ -53,11 +53,15 @@ func main() {
 	}
 
 	defer file.Close()
-
+	_, err1 := file.WriteString(epoch)
 	_, err2 := file.WriteString(name)
 	_, err3 := file.WriteString(roll)
 	_, err4 := file.WriteString(course)
 
+	if err1 != nil {
+		errorHandler(err1)
+		log.Fatalf("%s", err1)
+	}	
 	if err2 != nil {
 		errorHandler(err2)
 		log.Fatalf("%s", err2)
