@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 )
 
 //Funtion for logging errors
@@ -15,6 +16,14 @@ func errorHandler(err error) {
 
 //Function to get attendance
 func getStudentInfo() (name, roll, course string) {
+	
+	now:= time.Now()
+	fmt.Println("Day: ", now.Day())
+	fmt.Println("Month: ", now.Month())
+	fmt.Println("Year: ", now.Year())
+	fmt.Println("Time: ", now.Local())
+	epoch:= now.Unix()
+	
 	fmt.Println("Enter the student name:")
 
 	inputReader := bufio.NewReader(os.Stdin)
@@ -30,7 +39,7 @@ func getStudentInfo() (name, roll, course string) {
 	inputReader = bufio.NewReader(os.Stdin)
 	course, _ = inputReader.ReadString('\n')
 
-	return name, roll, course
+	return epoch, name, roll, course
 }
 
 //Main
